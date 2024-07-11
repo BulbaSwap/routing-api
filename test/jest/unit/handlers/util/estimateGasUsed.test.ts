@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@ququzone/sdk-core'
 import { adhocCorrectGasUsed } from '../../../../../lib/util/estimateGasUsed'
 import { BigNumber } from '@ethersproject/bignumber'
 import { CELO_UPPER_SWAP_GAS_LIMIT, ZKSYNC_UPPER_SWAP_GAS_LIMIT } from '../../../../../lib/util/gasLimit'

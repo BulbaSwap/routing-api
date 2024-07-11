@@ -1,11 +1,11 @@
 import { Factory } from 'fishery'
 
-import { ChainId, Percent, Token } from '@uniswap/sdk-core'
+import { ChainId, Percent, Token } from '@ququzone/sdk-core'
 import { TradeTypeParam } from '../../../../lib/handlers/quote/schema/quote-schema'
 import { expect, jest } from '@jest/globals'
-import { SwapType } from '@uniswap/smart-order-router'
+import { SwapType } from '@ququzone/smart-order-router'
 import { utils } from 'ethers'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
+import { UNIVERSAL_ROUTER_ADDRESS } from '@ququzone/universal-router-sdk'
 
 import {
   SwapOptionsFactory,

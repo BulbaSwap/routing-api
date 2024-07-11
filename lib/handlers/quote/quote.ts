@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
-import { Protocol } from '@uniswap/router-sdk'
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { Protocol } from '@ququzone/router-sdk'
+import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@ququzone/sdk-core'
 import {
   AlphaRouterConfig,
   ID_TO_NETWORK_NAME,
@@ -11,8 +11,8 @@ import {
   SimulationStatus,
   SwapOptions,
   SwapRoute,
-} from '@uniswap/smart-order-router'
-import { Pool } from '@uniswap/v3-sdk'
+} from '@ququzone/smart-order-router'
+import { Pool } from '@ququzone/v3-sdk'
 import JSBI from 'jsbi'
 import _ from 'lodash'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'

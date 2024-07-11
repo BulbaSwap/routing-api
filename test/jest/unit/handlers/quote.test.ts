@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals'
 import { QuoteHandler } from '../../../../lib/handlers/quote/quote'
-import { ChainId } from '@uniswap/sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { ChainId } from '@ququzone/sdk-core'
+import { Protocol } from '@ququzone/router-sdk'
 
 describe('QuoteHandler', () => {
   describe('.protocolsFromRequest', () => {

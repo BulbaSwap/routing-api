@@ -1,6 +1,6 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { AllowanceTransfer, PermitSingle } from '@uniswap/permit2-sdk'
-import { ChainId, Currency, CurrencyAmount, Ether, Fraction, Rounding, Token, WETH9 } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Ether, Fraction, Rounding, Token, WETH9 } from '@ququzone/sdk-core'
 import {
   CEUR_CELO,
   CEUR_CELO_ALFAJORES,
@@ -21,12 +21,12 @@ import {
   USDC_NATIVE_POLYGON,
   USDT_MAINNET,
   WBTC_MAINNET,
-} from '@uniswap/smart-order-router'
+} from '@ququzone/smart-order-router'
 import {
   PERMIT2_ADDRESS,
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN,
-} from '@uniswap/universal-router-sdk'
-import { MethodParameters } from '@uniswap/smart-order-router'
+} from '@ququzone/universal-router-sdk'
+import { MethodParameters } from '@ququzone/smart-order-router'
 import { fail } from 'assert'
 import axiosStatic, { AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'
@@ -45,7 +45,7 @@ import { resetAndFundAtBlock } from '../../utils/forkAndFund'
 import { getBalance, getBalanceAndApprove } from '../../utils/getBalanceAndApprove'
 import { DAI_ON, getAmount, getAmountFromToken, UNI_MAINNET, USDC_ON, USDT_ON, WNATIVE_ON } from '../../utils/tokens'
 import { FLAT_PORTION, GREENLIST_TOKEN_PAIRS, Portion } from '../../test-utils/mocked-data'
-import { WRAPPED_NATIVE_CURRENCY } from '@uniswap/smart-order-router/build/main/index'
+import { WRAPPED_NATIVE_CURRENCY } from '@ququzone/smart-order-router/build/main/index'
 
 const { ethers } = hre
 
@@ -1119,7 +1119,7 @@ describe('quote', function () {
               tokenInAndTokenOut.forEach(([tokenIn, tokenOut]) => {
                 // If this test fails sporadically, dev needs to investigate further
                 // There could be genuine regressions in the form of race condition, due to complex layers of caching
-                // See https://github.com/Uniswap/smart-order-router/pull/415#issue-1914604864 as an example race condition
+                // See https://github.com/ququzone/smart-order-router/pull/415#issue-1914604864 as an example race condition
                 it(`fee-on-transfer ${tokenIn.symbol} -> ${tokenOut.symbol}`, async () => {
                   const enableFeeOnTransferFeeFetching = [true, false, undefined]
                   // we want to swap the tokenIn/tokenOut order so that we can test both sellFeeBps and buyFeeBps for exactIn vs exactOut
@@ -1131,7 +1131,7 @@ describe('quote', function () {
                     enableFeeOnTransferFeeFetching.map(async (enableFeeOnTransferFeeFetching) => {
                       if (enableFeeOnTransferFeeFetching) {
                         // if it's FOT flag enabled request, we delay it so that it's more likely to repro the race condition in
-                        // https://github.com/Uniswap/smart-order-router/pull/415#issue-1914604864
+                        // https://github.com/ququzone/smart-order-router/pull/415#issue-1914604864
                         await new Promise((f) => setTimeout(f, 1000))
                       }
                       const simulateFromAddress = tokenIn.equals(WETH9[ChainId.MAINNET]!)
@@ -1178,7 +1178,7 @@ describe('quote', function () {
                         const quoteWithFlagon = CurrencyAmount.fromRawAmount(tokenOut, quoteWithFlagOn!.data.quote)
 
                         // quote without fot flag must be greater than the quote with fot flag
-                        // this is to catch https://github.com/Uniswap/smart-order-router/pull/421
+                        // this is to catch https://github.com/ququzone/smart-order-router/pull/421
                         expect(quote.greaterThan(quoteWithFlagon)).to.be.true
 
                         // below is additional assertion to ensure the quote without fot tax vs quote with tax should be very roughly equal to the fot sell/buy tax rate
@@ -1980,7 +1980,7 @@ describe('quote', function () {
             expect(parseFloat(quoteGasAdjustedDecimals)).to.be.greaterThanOrEqual(parseFloat(quoteDecimals))
           }
 
-          // Since ur-sdk hardcodes recipient in case of no recipient https://github.com/Uniswap/universal-router-sdk/blob/main/src/entities/protocols/uniswap.ts#L68
+          // Since ur-sdk hardcodes recipient in case of no recipient https://github.com/ququzone/universal-router-sdk/blob/main/src/entities/protocols/uniswap.ts#L68
           // the calldata will still get generated even if URA doesn't pass in recipient
           expect(methodParameters).not.to.be.undefined
         })
@@ -2473,6 +2473,7 @@ describe('quote', function () {
     [ChainId.ROOTSTOCK]: () => USDC_ON(ChainId.ROOTSTOCK),
     [ChainId.BLAST]: () => USDB_BLAST,
     [ChainId.ZKSYNC]: () => USDC_ON(ChainId.ZKSYNC),
+    [ChainId.HOLESKY]: () => null,
   }
 
   const TEST_ERC20_2: { [chainId in ChainId]: () => Token | null } = {
@@ -2500,6 +2501,7 @@ describe('quote', function () {
     [ChainId.ROOTSTOCK]: () => WNATIVE_ON(ChainId.ROOTSTOCK),
     [ChainId.BLAST]: () => WNATIVE_ON(ChainId.BLAST),
     [ChainId.ZKSYNC]: () => WNATIVE_ON(ChainId.ZKSYNC),
+    [ChainId.HOLESKY]: () => null,
   }
 
   // TODO: Find valid pools/tokens on optimistic kovan and polygon mumbai. We skip those tests for now.

@@ -1,7 +1,7 @@
-import { IOnChainQuoteProvider, log, metric, MetricLoggerUnit, OnChainQuotes } from '@uniswap/smart-order-router'
-import { MixedRoute, V2Route, V3Route } from '@uniswap/smart-order-router/build/main/routers'
-import { ChainId, Currency, CurrencyAmount } from '@uniswap/sdk-core'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
+import { IOnChainQuoteProvider, log, metric, MetricLoggerUnit, OnChainQuotes } from '@ququzone/smart-order-router'
+import { MixedRoute, V2Route, V3Route } from '@ququzone/smart-order-router/build/main/routers'
+import { ChainId, Currency, CurrencyAmount } from '@ququzone/sdk-core'
+import { ProviderConfig } from '@ququzone/smart-order-router/build/main/providers/provider'
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
@@ -288,7 +288,7 @@ export class TrafficSwitchOnChainQuoteProvider implements IOnChainQuoteProvider 
 
         if (!(currentQuote.quote ?? BigNumber.from(0)).eq(targetQuote.quote ?? BigNumber.from(0))) {
           // This is to deal with the case, where some quotes from the quoter multicalls failed,
-          // but still above the success rate threshold (https://github.com/Uniswap/smart-order-router/blob/main/src/providers/on-chain-quote-provider.ts#L496)
+          // but still above the success rate threshold (https://github.com/ququzone/smart-order-router/blob/main/src/providers/on-chain-quote-provider.ts#L496)
           // so that the current quote failed, but the view-only quoter is more gas-efficient, and can return the quote.
           if (!currentQuote.quote && targetQuote.quote) {
             const gasEstimate = currentQuote.gasEstimate?.toNumber() ?? 0

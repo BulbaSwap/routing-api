@@ -1,6 +1,6 @@
-import { Protocol } from '@uniswap/router-sdk'
-import { V2SubgraphProvider, V3SubgraphProvider } from '@uniswap/smart-order-router'
-import { ChainId } from '@uniswap/sdk-core'
+import { Protocol } from '@ququzone/router-sdk'
+import { V2SubgraphProvider, V3SubgraphProvider } from '@ququzone/smart-order-router'
+import { ChainId } from '@ququzone/sdk-core'
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below

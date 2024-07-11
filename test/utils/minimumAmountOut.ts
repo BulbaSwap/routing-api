@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Fraction, Percent } from '@ququzone/sdk-core'
 import JSBI from 'jsbi'
 import invariant from 'tiny-invariant'
 

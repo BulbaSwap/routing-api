@@ -1,13 +1,13 @@
-import { ChainId, Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Percent } from '@ququzone/sdk-core'
 import {
   AlphaRouterConfig,
   CacheMode,
   LowerCaseStringArray,
   MapWithLowerCaseKey,
   ProtocolPoolSelection,
-} from '@uniswap/smart-order-router'
-import { FeeOptions } from '@uniswap/v3-sdk'
-import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
+} from '@ququzone/smart-order-router'
+import { FeeOptions } from '@ququzone/v3-sdk'
+import { FlatFeeOptions } from '@ququzone/universal-router-sdk'
 
 export const SECONDS_PER_BLOCK_BY_CHAIN_ID: { [chainId in ChainId]?: number } = {
   [ChainId.MAINNET]: 30,

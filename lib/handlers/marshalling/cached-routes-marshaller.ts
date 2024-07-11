@@ -1,6 +1,6 @@
-import { CachedRoutes } from '@uniswap/smart-order-router'
-import { ChainId, TradeType } from '@uniswap/sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { CachedRoutes } from '@ququzone/smart-order-router'
+import { ChainId, TradeType } from '@ququzone/sdk-core'
+import { Protocol } from '@ququzone/router-sdk'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
 

@@ -9,11 +9,11 @@ import {
   DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
   DEFAULT_RETRY_OPTIONS,
   DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '@uniswap/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
-import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@uniswap/sdk-core'
+} from '@ququzone/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
+import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@ququzone/sdk-core'
 import AsyncRetry from 'async-retry'
-import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@uniswap/smart-order-router'
-import { Protocol } from '@uniswap/router-sdk'
+import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@ququzone/smart-order-router'
+import { Protocol } from '@ququzone/router-sdk'
 
 export const RETRY_OPTIONS: { [chainId: number]: AsyncRetry.Options | undefined } = {
   ...constructSameRetryOptionsMap(DEFAULT_RETRY_OPTIONS),
@@ -97,6 +97,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol: string]: { [cha
       gasLimitPerCall: 4_000_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HOLESKY]: {
+      multicallChunk: 1850,
+      gasLimitPerCall: 80_000,
+      quoteMinSuccessRate: 0.15,
+    }
   },
   [Protocol.MIXED]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -145,6 +150,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol: string]: { [cha
       gasLimitPerCall: 4_000_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HOLESKY]: {
+      multicallChunk: 1320,
+      gasLimitPerCall: 100_000,
+      quoteMinSuccessRate: 0.1,
+    }
   },
 }
 
@@ -201,6 +211,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol: string]: { 
       gasLimitPerCall: 4_000_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HOLESKY]: {
+      multicallChunk: 660,
+      gasLimitPerCall: 200_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
   [Protocol.MIXED]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -249,6 +264,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol: string]: { 
       gasLimitPerCall: 4_000_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HOLESKY]: {
+      multicallChunk: 660,
+      gasLimitPerCall: 200_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
 }
 
@@ -278,6 +298,10 @@ export const GAS_ERROR_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrides 
     gasLimitOverride: 6_000_000,
     multicallChunk: 10,
   },
+  [ChainId.HOLESKY]: {
+    gasLimitOverride: 3_000_000,
+    multicallChunk: 45,
+  },
 }
 
 export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrides } = {
@@ -305,6 +329,10 @@ export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrid
   [ChainId.ZKSYNC]: {
     gasLimitOverride: 6_000_000,
     multicallChunk: 10,
+  },
+  [ChainId.HOLESKY]: {
+    gasLimitOverride: 3_000_000,
+    multicallChunk: 45,
   },
 }
 
@@ -342,6 +370,14 @@ export const BLOCK_NUMBER_CONFIGS: { [chainId: number]: BlockNumberConfig } = {
       rollbackBlockOffset: -10,
     },
   },
+  [ChainId.HOLESKY]: {
+    baseBlockOffset: -25,
+    rollback: {
+      enabled: true,
+      attemptsBeforeRollback: 1,
+      rollbackBlockOffset: -20,
+    },
+  },
 }
 
 // block -1 means it's never deployed
@@ -371,6 +407,7 @@ export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in ChainId]: number } = {
   [ChainId.ROOTSTOCK]: -1,
   [ChainId.BLAST]: 2370179,
   [ChainId.ZKSYNC]: 35982078,
+  [ChainId.HOLESKY]: 3430722,
 }
 
 // 0 threshold means it's not deployed yet
@@ -399,6 +436,7 @@ export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in ChainId]: number } = {
   [ChainId.ROOTSTOCK]: 0,
   [ChainId.BLAST]: 17540 * 2, // 17540 is the single tick.cross cost on blast. We multiply by 2 to be safe,
   [ChainId.ZKSYNC]: 17540 * 2, // 17540 is the single tick.cross cost on zkSync. We multiply by 2 to be safe
+  [ChainId.HOLESKY]: 17540 * 2,
 }
 
 // TODO: Move this new addresses to SOR

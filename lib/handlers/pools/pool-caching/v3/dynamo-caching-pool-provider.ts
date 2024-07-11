@@ -1,7 +1,7 @@
-import { IV3PoolProvider, V3PoolAccessor } from '@uniswap/smart-order-router'
-import { ChainId, Token } from '@uniswap/sdk-core'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
-import { FeeAmount, Pool } from '@uniswap/v3-sdk'
+import { IV3PoolProvider, V3PoolAccessor } from '@ququzone/smart-order-router'
+import { ChainId, Token } from '@ququzone/sdk-core'
+import { ProviderConfig } from '@ququzone/smart-order-router/build/main/providers/provider'
+import { FeeAmount, Pool } from '@ququzone/v3-sdk'
 import { IDynamoCache } from '../cache-dynamo'
 import { DynamoCachingV3Pool } from './cache-dynamo-pool'
 

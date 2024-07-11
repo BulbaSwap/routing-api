@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@ququzone/sdk-core'
 import { CELO_UPPER_SWAP_GAS_LIMIT, ZKSYNC_UPPER_SWAP_GAS_LIMIT } from './gasLimit'
 
 export function adhocCorrectGasUsed(estimatedGasUsed: BigNumber, chainId: ChainId, requestSource: string): BigNumber {
