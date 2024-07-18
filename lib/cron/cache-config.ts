@@ -1,6 +1,7 @@
 import { Protocol } from '@ququzone/router-sdk'
 import { V2SubgraphProvider, V3SubgraphProvider } from '@ququzone/smart-order-router'
 import { ChainId } from '@ququzone/sdk-core'
+import { castArray } from 'lodash'
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below
@@ -26,6 +27,8 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-base/api`
     case ChainId.CELO:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-celo/api`
+    case ChainId.HOLESKY:
+      return `https://api.goldsky.com/api/public/project_cly6zqxwr6p4o011ddhk045by/subgraphs/bulbaswap-subgraph/v3-1.0.0/gn`
     default:
       return undefined
   }
@@ -49,6 +52,8 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-blast/api`
     case ChainId.BASE:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-base/api`
+    case ChainId.HOLESKY:
+      return `https://api.goldsky.com/api/public/project_cly6zqxwr6p4o011ddhk045by/subgraphs/bulbaswap-subgraph/v2-1.0.0/gn`
     default:
       return undefined
   }
