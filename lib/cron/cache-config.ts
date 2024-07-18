@@ -1,7 +1,6 @@
 import { Protocol } from '@ququzone/router-sdk'
 import { V2SubgraphProvider, V3SubgraphProvider } from '@ququzone/smart-order-router'
 import { ChainId } from '@ququzone/sdk-core'
-import { castArray } from 'lodash'
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below
@@ -194,6 +193,20 @@ export const chainProtocols = [
       v3SubgraphUrlOverride(ChainId.BLAST)
     ),
   },
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.HOLESKY,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(
+      ChainId.HOLESKY,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.HOLESKY)
+    ),
+  },
 
   // V2.
   {
@@ -314,6 +327,21 @@ export const chainProtocols = [
       v2TrackedEthThreshold,
       v2UntrackedUsdThreshold,
       v2SubgraphUrlOverride(ChainId.BLAST)
+    ),
+  },
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.HOLESKY,
+    timeout: 90000,
+    provider: new V2SubgraphProvider(
+      ChainId.HOLESKY,
+      3,
+      90000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold,
+      v2SubgraphUrlOverride(ChainId.HOLESKY)
     ),
   },
 ]
