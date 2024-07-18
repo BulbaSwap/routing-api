@@ -24,6 +24,7 @@ export function chainIdToNetworkName(networkId: ChainId): string {
 }
 
 export function generateProviderUrl(key: string, value: string): string {
+  console.log(`key: ${key}-value: ${value}`)
   // const tokens = value.split(',')
   // switch (key) {
   //   // Infura
